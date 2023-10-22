@@ -26,4 +26,14 @@ export class UserService {
         
     }
 
+    async persist(dto: RegisterUserDto): Promise<User>{
+        const newUser = new User;
+        newUser.fullName = dto.fullName;
+        newUser.email = dto.email;
+        newUser.password = dto.password;
+        return this.userRepository.save({...newUser});
+    }
+
+
+
 }
