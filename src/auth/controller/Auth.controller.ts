@@ -16,6 +16,7 @@ export class AuthController {
         return new HttpResponse(200, "Usuario registrado exitosamente", await this.authService.register(registerDto));
     }
 
+
     @Post("login")
     async login(@Body() loginDto: LoginUserDto): Promise<HttpResponse> {
         const token = await this.authService.login(loginDto);
