@@ -32,7 +32,6 @@ export class ReportService {
         });
     }
 
-
     async persistReport( dto: CreateReportDto ): Promise<Report>{
         const newReport = new Report();
         newReport.cameraName = dto.cameraName;
@@ -45,4 +44,8 @@ export class ReportService {
 
         return this.reportRepository.save(newReport);
     } 
+
+    async deleteReportById(report: Report) {
+        this.reportRepository.remove(report);
+    }
 }
