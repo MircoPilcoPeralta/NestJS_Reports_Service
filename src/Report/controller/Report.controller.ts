@@ -59,6 +59,7 @@ export class ReportController {
 
         await this.reportService.deleteReportById(report);
         return new HttpResponse(200, "Reporte eliminado");
+
     }
 
     private reportEntityToVo(report: Report): ReportVo{
@@ -79,6 +80,7 @@ export class ReportController {
         return reports.map(
             (report: Report) => this.reportEntityToVo(report)
         );
+
     }
 
 }

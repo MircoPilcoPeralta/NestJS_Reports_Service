@@ -37,6 +37,6 @@ export class UserService {
     async validateJWTPayload(payload: JWTPayload): Promise<User> {
         const { id } = payload;
         return this.userRepository.findOneBy({ _id: new mongoose.Types.ObjectId(id) }); 
-    }
+      }
 
 }
