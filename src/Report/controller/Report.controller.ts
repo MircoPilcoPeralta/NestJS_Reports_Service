@@ -28,6 +28,17 @@ export class ReportController {
         return new HttpResponse(200,"Reporte encontrado correctamente", this.reportEntityToVo(findRepository));
     }
 
+    @Get()
+    async findByUserId( @Query("userId") userId: number ): Promise<HttpResponse> {
+        const reports = await this.reportService.findByUserId(userId);
+        
+        if(reports.length === 0){
+            return new HttpResponse(200, "El usuario no tiene reportes guardados")
+        }
+
+        return new HttpResponse(200, "Reportes encontrados correctamente", this.reportListToVoList(reports));
+    }
+
 
     @Post()
     async persistReport(@Body() dto: CreateReportDto): Promise<HttpResponse> {
