@@ -11,6 +11,10 @@ export class ReportService {
         @InjectRepository(Report) private readonly reportRepository: MongoRepository<Report>
     ){}
 
+    private getMongoId(mongoIdString): mongoose.Types.ObjectId{
+        return new mongoose.Types.ObjectId(mongoIdString);
+    }
+        
 
     async persistReport( dto: CreateReportDto ): Promise<Report>{
         const newReport = new Report();
@@ -21,7 +25,7 @@ export class ReportService {
         newReport.time = dto.time;
         newReport.userId = dto.userId;
         newReport.imageURL = dto.imageURL;
+
         return this.reportRepository.save(newReport);
     } 
-
 }
