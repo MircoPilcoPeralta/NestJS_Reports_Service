@@ -16,6 +16,15 @@ export class AuthController {
         return new HttpResponse(200, "Usuario registrado exitosamente", await this.authService.register(registerDto));
     }
 
+    @Post("login")
+    async login(@Body() loginDto: LoginUserDto): Promise<HttpResponse> {
+        const token = await this.authService.login(loginDto);
+        if(!token){
+            throw new BadRequestException(new HttpResponse(400, "Correo o contraseña incorrectos."));
+        }
+        return new HttpResponse(200, "Inicio de sesion exitoso", token);
+    }
+
 }
 
 
