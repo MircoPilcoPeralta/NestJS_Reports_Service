@@ -28,6 +28,7 @@ export class ReportController {
         return new HttpResponse(200,"Reporte encontrado correctamente", this.reportEntityToVo(findRepository));
     }
 
+
     @Post()
     async persistReport(@Body() dto: CreateReportDto): Promise<HttpResponse> {
         const user = await this.userService.findById(dto.userId);
@@ -37,7 +38,6 @@ export class ReportController {
         const savedReport = await this.reportService.persistReport(dto);
         return new HttpResponse(201, "Reporte guardado correctamente", this.reportEntityToVo(savedReport));        
     }
-
 
 
     private reportEntityToVo(report: Report): ReportVo{
@@ -53,4 +53,11 @@ export class ReportController {
         
         return reportVo;
     }
+
+    private reportListToVoList(reports: Report[]): ReportVo[]{
+        return reports.map(
+            (report: Report) => this.reportEntityToVo(report)
+        );
+    }
+
 }
