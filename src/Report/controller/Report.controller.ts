@@ -9,7 +9,7 @@ import { UserService } from "src/User/service/User.service";
 import { JwtAuthGuard } from "src/auth/guard/jwt-auht.guard";
 
 @Controller("api/v1/report")
-
+@UseGuards(JwtAuthGuard)
 export class ReportController {
     constructor (
         private reportService: ReportService,
@@ -27,7 +27,7 @@ export class ReportController {
         return new HttpResponse(201, "Reporte guardado correctamente", this.reportEntityToVo(savedReport));        
     }
 
-
+    
     private reportEntityToVo(report: Report): ReportVo{
         const reportVo = new ReportVo();
 
