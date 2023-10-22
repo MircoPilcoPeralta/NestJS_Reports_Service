@@ -9,13 +9,14 @@ import { jwtConstants } from "./constants";
 
 @Module({
     imports: [
+        UserModule,
         PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret
         })
     ],
-    controllers: [],
-    providers: [JwtStrategy]
+    controllers: [AuthController],
+    providers: [AuthService, JwtStrategy]
 })
 
 export class AuthModule{}
