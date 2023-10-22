@@ -34,6 +34,9 @@ export class UserService {
         return this.userRepository.save({...newUser});
     }
 
-
+    async validateJWTPayload(payload: JWTPayload): Promise<User> {
+        const { id } = payload;
+        return this.userRepository.findOneBy({ _id: new mongoose.Types.ObjectId(id) }); 
+    }
 
 }
