@@ -16,27 +16,5 @@ export class UserService {
         return this.userRepository.findOneBy({email});
     }
 
-    async findById(id: string): Promise<User | null>{
-        try {
-            const findReport = this.userRepository.findOneBy({_id: new mongoose.Types.ObjectId(id)});
-            return findReport;
-        } catch (error) {
-            return null;
-        }
-        
-    }
-
-    async persist(dto: RegisterUserDto): Promise<User>{
-        const newUser = new User;
-        newUser.fullName = dto.fullName;
-        newUser.email = dto.email;
-        newUser.password = dto.password;
-        return this.userRepository.save({...newUser});
-    }
-
-    async validateJWTPayload(payload: JWTPayload): Promise<User> {
-        const { id } = payload;
-        return this.userRepository.findOneBy({ _id: new mongoose.Types.ObjectId(id) }); 
-      }
 
 }
