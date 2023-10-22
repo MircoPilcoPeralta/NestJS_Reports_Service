@@ -28,6 +28,18 @@ export class ReportController {
         return new HttpResponse(200,"Reporte encontrado correctamente", this.reportEntityToVo(findRepository));
     }
 
+    @Get()
+    async findByUserId( @Query("userId") userId: number ): Promise<HttpResponse> {
+        const reports = await this.reportService.findByUserId(userId);
+        
+        if(reports.length === 0){
+            return new HttpResponse(200, "El usuario no tiene reportes guardados")
+        }
+
+        return new HttpResponse(200, "Reportes encontrados correctamente", this.reportListToVoList(reports));
+    }
+
+
     @Post()
     async persistReport(@Body() dto: CreateReportDto): Promise<HttpResponse> {
         const user = await this.userService.findById(dto.userId);
@@ -37,7 +49,6 @@ export class ReportController {
         const savedReport = await this.reportService.persistReport(dto);
         return new HttpResponse(201, "Reporte guardado correctamente", this.reportEntityToVo(savedReport));        
     }
-
 
 
     private reportEntityToVo(report: Report): ReportVo{
@@ -53,4 +64,11 @@ export class ReportController {
         
         return reportVo;
     }
+
+    private reportListToVoList(reports: Report[]): ReportVo[]{
+        return reports.map(
+            (report: Report) => this.reportEntityToVo(report)
+        );
+    }
+
 }
