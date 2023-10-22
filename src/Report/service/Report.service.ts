@@ -16,6 +16,15 @@ export class ReportService {
     }
         
 
+    async findById(id: number): Promise<Report | null>{
+        try {
+            const findReport = this.reportRepository.findOneBy({_id: this.getMongoId(id)});
+            return findReport;
+        } catch (error) {
+            return null;
+        }
+    }
+
     async persistReport( dto: CreateReportDto ): Promise<Report>{
         const newReport = new Report();
         newReport.cameraName = dto.cameraName;
