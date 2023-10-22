@@ -50,6 +50,16 @@ export class ReportController {
         return new HttpResponse(201, "Reporte guardado correctamente", this.reportEntityToVo(savedReport));        
     }
 
+    @Delete(":id")
+    async removeReport(@Param("id") id: number): Promise<HttpResponse>{
+        const report = await this.reportService.findById(id);
+        if(!report){
+            throw new NotFoundException(new HttpResponse(404, "Reporte no encontrado"));
+        }
+
+        await this.reportService.deleteReportById(report);
+        return new HttpResponse(200, "Reporte eliminado");
+    }
 
     private reportEntityToVo(report: Report): ReportVo{
         const reportVo = new ReportVo();
