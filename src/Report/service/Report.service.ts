@@ -25,6 +25,14 @@ export class ReportService {
         }
     }
 
+    async findByUserId(userId: number): Promise<Report[]>{
+        return this.reportRepository.find({
+            userId,             
+            order: { date: "DESC"}
+        });
+    }
+
+
     async persistReport( dto: CreateReportDto ): Promise<Report>{
         const newReport = new Report();
         newReport.cameraName = dto.cameraName;
