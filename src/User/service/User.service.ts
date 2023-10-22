@@ -16,5 +16,14 @@ export class UserService {
         return this.userRepository.findOneBy({email});
     }
 
+    async findById(id: string): Promise<User | null>{
+        try {
+            const findReport = this.userRepository.findOneBy({_id: new mongoose.Types.ObjectId(id)});
+            return findReport;
+        } catch (error) {
+            return null;
+        }
+        
+    }
 
 }
