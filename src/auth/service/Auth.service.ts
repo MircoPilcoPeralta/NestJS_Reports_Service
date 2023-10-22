@@ -13,6 +13,11 @@ export class AuthService {
     private jwtService: JwtService) {}
 
 
+
+  async isEmailRegistered (email: string): Promise<boolean>{
+    return !!await this.userService.findByEmail(email);
+  }
+
   async register(registerDto: RegisterUserDto) {
     const hashedPassword = await hash(registerDto.password, 10);
     registerDto.password = hashedPassword;
