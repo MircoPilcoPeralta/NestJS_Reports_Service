@@ -12,7 +12,7 @@ import { UserModule } from './User/User.module';
     TypeOrmModule.forRoot({
       type: 'mongodb',
       url:
-        'mongodb+srv://usuario:Hh8OtkYV0iptmbnN@cluster0.qzjrnxl.mongodb.net/SisDeteccionBD?retryWrites=true&w=majority',
+        'mongodb://localhost:27017',
       entities: [join(__dirname, '**', '*.schema.{ts,js}')],
       synchronize: true,
       useNewUrlParser: true,
