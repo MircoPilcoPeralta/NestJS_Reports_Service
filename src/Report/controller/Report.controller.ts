@@ -2,11 +2,11 @@ import { Controller, Get, Post, Delete, Param, Query, Body, UseGuards } from "@n
 import { NotFoundException, BadRequestException } from '@nestjs/common/exceptions';
 import { ReportVo } from "../vo/Report.vo";
 import { ReportService } from "../service/Report.service";
-import { HttpResponse } from "src/interfaces/HttpResponse";
+import { HttpResponse } from "../../interfaces/HttpResponse";
 import { CreateReportDto } from "../dto/CreateReport.dto";
 import { Report } from "../schema/Report.schema";
-import { UserService } from "src/User/service/User.service";
-import { JwtAuthGuard } from "src/auth/guard/jwt-auht.guard";
+import { UserService } from "../../User/service/User.service";
+import { JwtAuthGuard } from "../../auth/guard/jwt-auht.guard";
 
 @Controller("api/v1/report")
 @UseGuards(JwtAuthGuard)
